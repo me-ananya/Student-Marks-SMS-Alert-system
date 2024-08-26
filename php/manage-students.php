@@ -199,7 +199,7 @@
     
                     if (isset($_POST['notify'])) {
                         require '../vendor/autoload.php';
-                        $basic = new \Vonage\Client\Credentials\Basic("eb759319", "NODEmCxalQySV4Ko");
+                        $basic = new \Vonage\Client\Credentials\Basic("Your Credentialas", "Your Credentialas");
                         $client = new \Vonage\Client($basic);
     
                         $query = "SELECT student_info.*, parent_info.parent_name, parent_info.parent_contact, (math_2 + dsa + be + chemistry + cetc) / 2.5 AS percentage
