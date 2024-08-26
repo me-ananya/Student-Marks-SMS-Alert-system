@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - GradUp</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --background-color: #ecf0f1;
+            --text-color: #34495e;
+            --success-color: #2ecc71;
+            --danger-color: #e74c3c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background-color: var(--secondary-color);
+            padding: 1rem 2rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .navbar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .navbar-brand {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .navbar-links {
+            display: flex;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background-color: var(--primary-color);
+            border-radius: 4px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 5rem auto 2rem;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--secondary-color);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -0.5rem;
+        }
+
+        .form-row > div {
+            flex: 1;
+            padding: 0 0.5rem;
+            min-width: 200px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+        }
+
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .marks-summary {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+            font-weight: 500;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--success-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #27ae60;
+        }
+
+        @media (max-width: 768px) {
+            .form-row > div {
+                flex-basis: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-content">
+            <a class="navbar-brand" href="#">GradUp Admin</a>
+            <div class="navbar-links">
+                <a class="nav-link" href="../php/manage-students.php">Manage Students</a>
+                <a class="nav-link" href="../php/settings.php">Settings</a>
+                <a class="nav-link" href="../php/logout.php">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Result Details</h1>
+
+        <form method="POST" action="../php/admin-exam-details-upload.php" onsubmit="return validation()">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="exampleInputName1">Student Name *</label>
+                    <input type="text" id="exampleInputName1" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email address *</label>
+                    <input type="email" id="exampleInputEmail1" name="emailid" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="exampleInputSection1">Section *</label>
+                    <input type="text" id="exampleInputSection1" name="section" required>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputRollno1">Roll No *</label>
+                    <input type="text" id="exampleInputRollno1" name="rollno" required>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputRegno1">Reg No *</label>
+                    <input type="number" id="exampleInputRegno1" name="regno" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="parentName">Parent Name *</label>
+                    <input type="text" id="parentName" name="parent_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="parentContact">Parent Contact *</label>
+                    <input type="text" id="parentContact" name="parent_contact" required>
+                </div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Subject</th>
+                        <th>Mark Obtained</th>
+                        <th>Total Mark</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mathematics - II</td>
+                        <td><input type="number" id="math-2" name="math-2" min="0" max="50"></td>
+                        <td>/ 50</td>
+                    </tr>
+                    <tr>
+                        <td>Data Structure & Algorithm</td>
+                        <td><input type="number" id="dsa" name="dsa" min="0" max="50"></td>
+                        <td>/ 50</td>
+                    </tr>
+                    <tr>
+                        <td>Basic Electronics</td>
+                        <td><input type="number" id="be" name="be" min="0" max="50"></td>
+                        <td>/ 50</td>
+                    </tr>
+                    <tr>
+                        <td>Chemistry</td>
+                        <td><input type="number" id="chemistry" name="chemistry" min="0" max="50"></td>
+                        <td>/ 50</td>
+                    </tr>
+                    <tr>
+                        <td>Communicative English & Technical Communication</td>
+                        <td><input type="number" id="cetc" name="cetc" min="0" max="50"></td>
+                        <td>/ 50</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div id="marks-summary1" class="marks-summary"></div>
+            <div id="marks-summary2" class="marks-summary"></div>
+
+            <div class="form-group">
+                <label for="exampleInputStatus1">Status *</label>
+                <select id="exampleInputStatus1" name="status" required>
+                    <option value="">Select Status</option>
+                    <option value="Pass">Pass</option>
+                    <option value="Fail">Fail</option>
+                </select>
+            </div>
+
+            <button type="submit" name="submit">Submit Result</button>
+        </form>
+    </div>
+
+    <script>
+       function calculateMarks() {
+        const subjects = ["math-2", "dsa", "be", "chemistry", "cetc"];
+        let totalMarks = 0;
+        let obtainedMarks = 0;
+        subjects.forEach((subject) => {
+          const mark = parseFloat(document.getElementById(subject).value) || 0;
+          obtainedMarks += mark;
+          totalMarks += 50; // Assuming each subject has a total of 50 marks
+        });
+        const percentage = (obtainedMarks / totalMarks) * 100;
+        const total = `Total Marks: ${obtainedMarks} / ${totalMarks}`;
+        const percen = `Percentage: ${percentage.toFixed(2)}%`;
+        document.getElementById("marks-summary1").innerText = total;
+        document.getElementById("marks-summary2").innerText = percen;
+      }
+
+      document.querySelectorAll('input[type="number"]').forEach((input) => {
+        input.addEventListener("input", calculateMarks);
+      });
+
+      document
+        .querySelector("form")
+        .addEventListener("submit", function (event) {
+          calculateMarks();
+        });
+    </script>
+</body>
+</html>
